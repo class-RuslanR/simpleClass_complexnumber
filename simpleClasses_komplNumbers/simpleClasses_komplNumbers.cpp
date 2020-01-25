@@ -1,21 +1,102 @@
-﻿// simpleClasses_komplNumbers.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include "pch.h"
+﻿#include "pch.h"
 #include <iostream>
+#include <math.h>
+
+using namespace std;
+
+class ComplexNum
+{
+	double real, imag;
+public:
+	ComplexNum();
+	ComplexNum(double real);
+	ComplexNum(double real, double imag);
+	~ComplexNum();
+	//double GetComplexReal();
+	//double GetComplexImag();
+	void print_complex();
+	ComplexNum operator + (ComplexNum & temp);
+};
+
+ComplexNum::ComplexNum()
+{
+	cout << "Введите действительное число: ";
+	cin >> real;
+	cout << "Введите мнимое число: ";
+	cin >> imag;
+};
+
+ComplexNum::ComplexNum(double real)
+{
+	this->real = real;
+	imag = 0;
+}
+
+ComplexNum::ComplexNum(double real, double imag)
+{
+	this->real = real;
+	this->imag = imag;
+}
+
+ComplexNum::~ComplexNum()
+{
+
+}
+
+/*double ComplexNum::GetComplexReal()
+{
+	cout << "Введите действительное число: ";
+	cin >> real;
+	return real;
+}
+
+double ComplexNum::GetComplexImag()
+{
+	cout << "Введите мнимое число: ";
+	cin >> imag;
+	return imag;
+}*/
+
+void ComplexNum::print_complex()
+{
+	if (imag <= 0)
+	{
+		cout << real << imag<< "i\n";
+	}
+	else
+	{
+		cout << real << "+" << imag << "i\n";
+	}
+}
+
+ComplexNum ComplexNum::operator+(ComplexNum & temp)
+{
+	temp.real = real + temp.real;
+	temp.imag = imag + temp.imag;
+	return temp;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	setlocale(LC_ALL, "ru");
+
+	ComplexNum numberZ1, numberZ2;
+	//numberZ1.GetComplexReal();
+	//numberZ1.GetComplexImag();
+	numberZ1.print_complex();
+
+	//numberZ2.GetComplexReal();
+	//numberZ2.GetComplexImag();
+	numberZ2.print_complex();
+
+	ComplexNum numberZ3(0, 0);
+	numberZ3 = numberZ1 + numberZ2;
+	cout << "Сумма комплексных чисел: Z1 + Z2 = ";
+	numberZ3.print_complex();
+	
+
+
+
+	system("pause");
+	return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
